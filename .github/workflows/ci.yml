@@ -1,0 +1,46 @@
+name: CI - Build and Test MNIST FastAPI App
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t mnist-app .
+
+      - name: Run Docker container
+        run: docker run -d --name mnist-container -p 8000:8000 mnist-app
+
+      - name: Wait for app to become ready
+        run: |
+          for i in {1..12}; do
+            if curl -fs http://localhost:8000/health; then
+              echo "Application started successfully"
+              exit 0
+            fi
+            echo "Waiting for application..."
+            sleep 5
+          done
+          echo "Application failed to start in time"
+          docker logs mnist-container
+          exit 1
+
+      - name: Print container logs on failure
+        if: failure()
+        run: docker logs mnist-container || true
+
+      - name: Stop and remove container
+        if: always()
+        run: |
+          docker stop mnist-container || true
+          docker rm mnist-container || true

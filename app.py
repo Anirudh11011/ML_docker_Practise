@@ -45,3 +45,7 @@ async def predict(file: UploadFile = File(...)):
 @app.get("/")
 def read_root():
     return {"message": "MNIST Prediction API is running!"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
