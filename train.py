@@ -22,7 +22,7 @@ def train():
 
     # 2. Initialize Model, Optimizer, and Loss
     model = Net()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=0.004)
     criterion = nn.CrossEntropyLoss()
 
     # 3. Fast Training (1 Epoch)
