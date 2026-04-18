@@ -13,7 +13,7 @@ jobs:
       ACR_NAME: dockerImage11011
       ACR_LOGIN_SERVER: dockerimage11011.azurecr.io
       IMAGE_NAME: mnist-app
-      WEBAPP_NAME: MLModel11011
+      WEBAPP_NAME: MLModel22022
 
     steps:
       - name: Checkout repository
