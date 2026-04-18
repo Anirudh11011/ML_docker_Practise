@@ -10,10 +10,10 @@ jobs:
     timeout-minutes: 30
 
     env:
-      ACR_NAME: youracrname
-      ACR_LOGIN_SERVER: youracrname.azurecr.io
+      ACR_NAME: dockerImage11011
+      ACR_LOGIN_SERVER: dockerimage11011.azurecr.io
       IMAGE_NAME: mnist-app
-      WEBAPP_NAME: your-webapp-name
+      WEBAPP_NAME: MLModel11011
 
     steps:
       - name: Checkout repository
